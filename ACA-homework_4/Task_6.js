@@ -4,37 +4,26 @@ Assume that all elements in the array are unique.
 */
 
 
-// Lucum@ grvac e miayn erb num = 2 kam 3
-function couple(array, num) {
-  let result = []
-  if (num == 2) {
+let array = [1, 2, 3, 4, 5] // [ [1, 2],  [1, 3],  [1, 4],  [2, 3],  //[2, 4],  [3, 4] ]
 
+function groupOfNumbers(array, num, result = []) {
+ if (num == 2) {
+        if (array.length == num) return [array];
+            for (let j = 1; j < array.length; j++) {
+            result.push([array[0], array[j]])
+            }
+    }
+    else if (num == 3) {
+        if (array.length == num) return [array];
+        for (let j = 1; j < array.length; j++) {
+            for (let k = j + 1; k < array.length; k++)
+                result.push([array[0], array[j], array[k]])
+        }       
+    } else return "Number shuld be 2 or 3"
 
-      for (let i = 0; i < array.length; i++) {
-
-          for (let j = i + 1; j < array.length; j++) {
-       
-
-                  result.push([array[i], array[j]])
-              
-          }
-      }
-  }
-  if (num == 3) {
-      for (let i = 0; i < array.length; i++) {
-
-          for (let j = i + 1; j < array.length; j++) {
-              for (let k = j + 1; k < array.length; k++) {
-
-                  result.push([array[i], array[j], array[k]])
-              }
-          }
-      }
-  }
-
-
-return result
+    array.shift()
+    return result.concat(groupOfNumbers(array, num, result = []))
 }
 
 
-console.log(couple(arr))
+console.log(groupOfNumbers(array, 2))
